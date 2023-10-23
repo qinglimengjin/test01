@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper接口的全类名和映射文件的命名空间（namespace）保持一致-->
+<mapper namespace="com.liu.mybatis.mapper.EmpMapper">
+
+    <resultMap id="baseEmpMap" type="com.liu.mybatis.pojo.Emp">
+    </resultMap>
+
+    <select id="findAll" resultType="com.liu.mybatis.pojo.Emp">
+        select *
+        from emp
+    </select>
+    <select id="findById" resultType="java.util.Map">
+        select ename, dname
+        from emp e,
+             dept d
+        where empno = #{empno}
+          and e.deptno = d.deptno
+    </select>
+    <select id="findAllMap" resultType="java.util.Map">
+        select ename, dname
+        from emp e,
+             dept d
+        where e.deptno = d.deptno
+    </select>
+    <select id="searchDate" resultType="java.util.Map">
+        select *
+        from emp
+        where ename = #{ename}
+          and sal = #{sal}
+          and hiredate between #{minHiredate} and #{maxHiredate};
+    </select>
+    <delete id="deleteEmp">
+        delete
+        from emp
+        where empno = #{id}
+    </delete>
+
+
+</mapper>
